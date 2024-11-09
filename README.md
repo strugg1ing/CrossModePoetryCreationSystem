@@ -24,7 +24,7 @@ python demo.py #自动下载模型文件model_base_capfilt_large.pth（下载后
 python main.py
 ```
 
-##项目文件目录参考如下
+## 项目文件目录参考如下（Python版本3.8）
 ```
 BLIP-main
 │   ├── bert-base-chinese
