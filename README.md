@@ -21,10 +21,10 @@ python demo.py #自动下载模型文件model_base_capfilt_large.pth（下载后
 ## Apache Http Server部署前后端分离项目
 ```
 安装apache2服务 # html文件夹包含项目的所有前端文件，Ubuntu系统将html文件夹放置在/var/www/
-python main.py
+python main.py # （Python版本3.8）
 ```
 
-## 项目文件目录参考如下（Python版本3.8）
+## 项目文件目录参考如下
 ```
 BLIP-main
 │   ├── bert-base-chinese
