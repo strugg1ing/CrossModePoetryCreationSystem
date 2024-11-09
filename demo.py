@@ -34,8 +34,8 @@ image_size = 384
 image = load_demo_image(image_size=image_size, device=device, img_path=input_image_path)
 
 # 加载模型权重
-model_path = 'model_base_capfilt_large.pth'
-model = blip_decoder(pretrained=model_path, image_size=image_size, vit='base')
+model_url = 'https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_base_capfilt_large.pth'
+model = blip_decoder(pretrained=model_url, image_size=image_size, vit='base')
 model.eval()
 model = model.to(device)
 
