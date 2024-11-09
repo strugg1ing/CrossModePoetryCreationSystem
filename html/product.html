@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta name="description" content="" />
+<title>在线系统</title>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link href="css/Animation.css" rel="stylesheet" type="text/css">
+<link href="css/slider.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script src="js/slider.js" type="text/javascript"></script>
+<script src="js/html5.js" type="text/javascript"></script>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
+<script src="js/wow.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+var wow = new WOW({
+    boxClass: 'wow',
+    animateClass: 'animated',
+    offset: 0,
+    mobile: false,
+    live: true
+});
+wow.init();
+</script>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background: url('images/p_bg_02.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+    .content-wrapper {
+        padding: 1em;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: auto;
+    }
+    section {
+        margin: 2em auto;
+        max-width: 600px;
+        text-align: center;
+        color: white;
+        flex: 1;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .upload-form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .upload-buttons {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .upload-buttons button {
+        font-size: 16px;
+        background-color: #095ced;
+        color: white;
+        padding: 0.625em 1.875em;
+        border: none;
+        border-radius: 1.25em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        flex: 1;
+        margin: 0 10px;
+    }
+    .upload-buttons button:hover {
+        background-color: #45a049;
+    }
+    .text-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+    }
+    textarea {
+        font-size: 16px;
+        padding: 0.625em;
+        border-radius: 0.625em;
+        border: 1px solid #ccc;
+        width: 100%;
+        background-color: transparent;
+        z-index: 2;
+        position: relative;
+    }
+    .text-preview {
+        font-size: 16px;
+        padding: 0.625em;
+        border-radius: 0.625em;
+        border: 1px solid #ccc;
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        color: black;
+        white-space: pre-wrap;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+    .result-container {
+        flex: 1;
+        padding: 1.5em;
+        background-color: rgba(255, 255, 255, 0.35);
+        border-radius: 15px;
+        margin-left: 2em;
+        max-width: 600px;
+        max-height: 400px;
+        overflow-y: auto;
+        text-align: center;
+        color: black;
+        font-family: 'KaiTi', 'STKaiti', serif;
+        font-size: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        background-image: url('/images/resultbg.jpg'); /* 设置背景图片路径 */
+        background-size: cover; /* 根据需要调整背景图片大小 */
+        
+        background-repeat: no-repeat; /* 背景图片不重复 */
+        background-position: center; /* 背景图片居中 */
+    }
+    footer {
+        background-color: #f8f7f7;
+        color: #333;
+        padding: 3.0em 0;
+        text-align: center;
+        clear: both;
+    }
+    #image-preview, #audio-preview {
+        display: block;
+        max-width: 100%;
+        margin: 10px 0;
+    }
+    .submit-button {
+        font-size: 18px;
+        background: linear-gradient(90deg, rgba(9,92,237,1) 0%, rgba(69,160,73,1) 100%);
+        color: white;
+        padding: 0.625em 2.5em;
+        border: none;
+        border-radius: 1.25em;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-top: 20px;
+    }
+    .submit-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .selection-button-b {
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 20px 40px;
+        margin: 0 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .selection-button-b.selected {
+        background-color: green;
+    }
+    .selection-button {
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .selection-button.selected {
+        background-color: green;
+    }
+
+</style>
+</head>
+<body>
+<header class="navbar-fixed-top headerbg">
+    <div class="container-fluid">
+        <div class="logo"><a href="index.html"><img src="images/logo.png" alt=""></a></div>
+        <div class="navBox hidden-xs hidden-sm">
+            <ul class="navList list-unstyled">
+                <li class="navLi">
+                    <h3><a href="index.html"><span>首页</span></a></h3>
+                </li>
+                <li class="navLi on">
+                    <h3><a href="product.html"><span>在线系统</span></a></h3>
+                </li>
+                <li class="navLi">
+                    <h3><a href="Company.html"><span>关于我们</span></a></h3>
+                    <div class="navSub">
+                        <ul class="navSubList list-unstyled">
+                            <li class="navSubLi">
+                                <h4><a href="Company.html">● 团队简介</a></h4>
+                            </li>
+                            <li class="navSubLi">
+                                <h4><a href="Contact.html">● 联系方式</a></h4>
+                            </li>
+                            <li class="navSubLi">
+                                <h4><a href="Comment.html">● 问题反馈</a></h4>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="header_phone">
+            <div class="icon_phone pt5 fl"><img src="images/icon_phone.png"></div>
+            <div class="phone fl">
+                <h4>联系电话：</h4>
+                <h2>173-3688-xxxx</h2>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="clearfix"></div>
+<div class="bannerN animated">
+    <div class="imgFull"><img src="images/p_bg_02.jpg" class="img-responsive"></div>
+    <h2 class="banH2 wow fadeInUp">跨模态诗词创作系统</h2>
+    <h3 class="wow fadeInUp">不断地更新训练数据，研发出更专业的创作系统</h3>
+    <div class="sky">
+        <div class="clouds_one"></div>
+        <div class="clouds_two"></div>
+        <div class="clouds_three"></div>
+    </div>
+</div>
+<div class="content-wrapper">
+    <section>
+        <div class="container">
+            <h3>上传文件</h3>
+            <form id="upload-form" class="upload-form" enctype="multipart/form-data">
+                <div class="upload-buttons">
+                    <input type="file" id="image-file-upload" name="image-files" accept="image/*" multiple style="display: none;">
+                    <button type="button" id="image-upload-button" onclick="document.getElementById('image-file-upload').click()">选择图片文件</button>
+                    <input type="file" id="audio-file-upload" name="audio-file" accept="audio/*" style="display: none;">
+                    <button type="button" id="audio-upload-button" onclick="document.getElementById('audio-file-upload').click()">选择音频文件</button>
+                </div>
+                <div id="image-file-preview-container">
+                    <span id="image-file-name-preview" style="display: none;"></span>
+                    <img id="image-preview" src="#" alt="图片预览" style="display: none;">
+                </div>
+                <div id="audio-file-preview-container">
+                    <span id="audio-file-name-preview" style="display: none;"></span>
+                    <audio id="audio-preview" controls style="display: none;">
+                        <source id="audio-source" src="#" type="">
+                        您的浏览器不支持 audio 元素。
+                    </audio>
+                </div>
+                <h3>输入文本</h3>
+                <div class="text-container">
+                    <textarea id="text-content" name="text" rows="5" placeholder="请输入文本内容..."></textarea>
+                    <!-- <div class="text-preview" id="text-preview"></div> -->
+                </div>
+                <div id="selection-buttons" style="margin-top: 20px;">
+                    <button type="button"  id="five-character-button" class="selection-button-b">五言绝句</button>
+                    <button type="button"  id="seven-character-button" class="selection-button-b">七言绝句</button>
+                </div>
+                <div id="selection-buttons" style="margin-top: 20px;">
+                    <button type="button"  id="poem-style-1" class="selection-button">桑梓乡愁</button>
+                    <button type="button"  id="poem-style-2" class="selection-button">良辰美景</button>
+                    <button type="button"  id="poem-style-3" class="selection-button">友谊情深</button>
+                    <button type="button"  id="poem-style-4" class="selection-button">春风得意</button>
+                </div> 
+                <div id="selection-buttons" style="margin-top: 20px;">
+                    <button type="button"  id="poem-style-5" class="selection-button">哀痛忧伤</button>
+                    <button type="button"  id="poem-style-6" class="selection-button">憬然有悟</button>
+                    <button type="button"  id="poem-style-7" class="selection-button">儿女情长</button>
+                    <button type="button"  id="poem-style-8" class="selection-button">托物言志</button>
+                </div>
+                <button type="button" class="submit-button" id="submit-button">点击创作</button>
+            </form>
+        </div>
+    </section>
+    <div class="result-container" id="result-container">
+        <h2>生成结果</h2>
+        <div id="result"></div>
+    </div>
+</div>
+
+<script>
+    var imageFile, audioFile;
+    var imageFiles = [];
+
+    document.getElementById('image-file-upload').addEventListener('change', function(event) {
+        imageFiles = Array.from(event.target.files);
+        var imagePreviewContainer = document.getElementById('image-file-preview-container');
+        imagePreviewContainer.innerHTML = ''; // 清空之前的预览
+        imageFiles.forEach(file => {
+            var fileName = file.name;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = new Image();
+                img.onload = function() {
+                        var imagePreview = document.createElement('img');
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.maxWidth = '100%';
+                        imagePreview.style.margin = '10px 0';
+                        imagePreviewContainer.appendChild(imagePreview);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    document.getElementById('audio-file-upload').addEventListener('change', function(event) {
+        audioFile = event.target.files[0];
+        if (audioFile) {
+            var fileName = audioFile.name;
+            var filePreview = document.getElementById('audio-file-name-preview');
+            filePreview.textContent = fileName;
+            filePreview.style.display = 'block';
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var audioPreview = document.getElementById('audio-preview');
+                var audioSource = document.getElementById('audio-source');
+                audioSource.src = e.target.result;
+                audioSource.type = audioFile.type;
+                audioPreview.load();
+                audioPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(audioFile);
+        }
+    });
+
+    document.getElementById('text-content').addEventListener('input', function(event) {
+        var textContent = event.target.value;
+        var textPreview = document.getElementById('text-preview');
+        textPreview.textContent = textContent;
+    });
+
+    document.getElementById('submit-button').addEventListener('click', function(event) {
+        alert('开始创作，请耐心等待！');
+
+        var formData = new FormData();
+        var imageFiles = document.getElementById('image-file-upload').files;
+        var audioFile = document.getElementById('audio-file-upload').files[0];
+        var textContent = document.getElementById('text-content').value;
+
+        // 附加图片文件
+        for (var i = 0; i < imageFiles.length; i++) {
+            formData.append('image', imageFiles[i]);  // 修改键名为 'image'
+        }
+
+        // 附加音频文件
+        if (audioFile) {
+            formData.append('audio', audioFile);  // 修改键名为 'audio'
+        }
+
+        // 附加文本内容
+        formData.append('text', textContent);
+        // 附加选择的格式
+        
+        formData.append('format', selectedFormat);
+
+        // 附加选择的风格
+        formData.append('style', selectedStyle);
+        // 提交到后端 /contact 路由
+        $.ajax({
+            url: '/contact',
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response.result) {
+                    document.getElementById('result').innerHTML = response.result || '无关键词';
+                    // alert('提交成功！');
+                } else {
+                    alert(response.error || '提交失败，请重试。');
+                }
+            },
+            error: function(xhr) {
+                var errorMessage = xhr.responseJSON?.error || '提交失败，请重试。';
+                alert(errorMessage);
+            }
+        });
+    });
+
+
+    document.getElementById('five-character-button').addEventListener('click', function() {
+        selectedFormat = 5;
+        this.style.backgroundColor = 'green';
+        document.getElementById('seven-character-button').style.backgroundColor = 'blue';
+    });
+
+    document.getElementById('seven-character-button').addEventListener('click', function() {
+        selectedFormat = 7;
+        this.style.backgroundColor = 'green';
+        document.getElementById('five-character-button').style.backgroundColor = 'blue';
+    });
+
+    document.getElementById('poem-style-1').addEventListener('click', function() {
+        this.style.backgroundColor = 'green';
+        selectedStyle = "桑梓乡愁"
+        document.getElementById('poem-style-2').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-3').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-4').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-5').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-6').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-7').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-8').style.backgroundColor = 'blue';
+    });
+    document.getElementById('poem-style-2').addEventListener('click', function() {
+        this.style.backgroundColor = 'green';
+        selectedStyle = "良辰美景"
+        document.getElementById('poem-style-1').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-3').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-4').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-5').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-6').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-7').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-8').style.backgroundColor = 'blue';
+    });
+    document.getElementById('poem-style-3').addEventListener('click', function() {
+        this.style.backgroundColor = 'green';
+        selectedStyle = "友谊情深"
+        document.getElementById('poem-style-2').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-1').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-4').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-5').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-6').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-7').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-8').style.backgroundColor = 'blue';
+    });
+    document.getElementById('poem-style-4').addEventListener('click', function() {
+        this.style.backgroundColor = 'green';
+        selectedStyle = "春风得意"
+        document.getElementById('poem-style-2').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-3').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-1').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-5').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-6').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-7').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-8').style.backgroundColor = 'blue';
+    });
+    document.getElementById('poem-style-5').addEventListener('click', function() {
+        this.style.backgroundColor = 'green';
+        selectedStyle = "哀痛忧伤"
+        document.getElementById('poem-style-2').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-3').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-4').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-1').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-6').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-7').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-8').style.backgroundColor = 'blue';
+    });
+    document.getElementById('poem-style-6').addEventListener('click', function() {
+        this.style.backgroundColor = 'green';
+        selectedStyle = "憬然有悟"
+        document.getElementById('poem-style-2').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-3').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-4').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-5').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-1').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-7').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-8').style.backgroundColor = 'blue';
+    });
+    document.getElementById('poem-style-7').addEventListener('click', function() {
+        this.style.backgroundColor = 'green';
+        selectedStyle = "儿女情长"
+        document.getElementById('poem-style-2').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-3').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-4').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-5').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-6').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-1').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-8').style.backgroundColor = 'blue';
+    });
+    document.getElementById('poem-style-8').addEventListener('click', function() {
+        this.style.backgroundColor = 'green';
+        selectedStyle = "托物言志"
+        document.getElementById('poem-style-2').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-3').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-4').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-5').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-6').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-7').style.backgroundColor = 'blue';
+        document.getElementById('poem-style-1').style.backgroundColor = 'blue';
+    });
+
+    function showDownloadAlert() {
+        alert('开始创作，请耐心等待！');
+    }
+</script>
+</body>
+</html>
