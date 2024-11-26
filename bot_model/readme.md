@@ -1,4 +1,5 @@
 ## 配置环境
+```
    pip install llama-cpp-python
    pip install openai
    pip install uvicorn
@@ -9,6 +10,7 @@
    pip install pydantic_settings
    pip install cmake
    pip install llama-cpp-python
+```
 ## 启动Qwen2大模型
 #### n_ctx=20480代表单次回话最大20480个Token数量
     python -m llama_cpp.server \
